@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="关于博主" />
+    <title>关于 · 墨迹</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/theme.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Archivo", "ui-sans-serif", "system-ui", "sans-serif"],
+              display: ["Space Grotesk", "ui-sans-serif", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/custom.css" />
+  </head>
+  <body class="min-h-screen bg-zinc-50 font-sans text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
+    <a href="#main" class="skip-link">跳到正文</a>
+
+    <header class="fixed left-4 right-4 top-4 z-50 mx-auto max-w-5xl">
+      <div
+        class="ui-header-in flex items-center justify-between gap-4 rounded-2xl border border-zinc-200/90 bg-white/90 px-4 py-3 shadow-sm backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90"
+      >
+        <a href="index.html" class="font-display text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">墨迹</a>
+        <nav class="hidden items-center gap-6 text-sm font-medium text-zinc-600 md:flex dark:text-zinc-300">
+          <a href="index.html#posts" class="cursor-pointer rounded-lg px-2 py-1 transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400">文章</a>
+          <a href="about.html" class="cursor-pointer rounded-lg px-2 py-1 text-blue-600 dark:text-blue-400">关于</a>
+          <a href="login.html" class="cursor-pointer rounded-lg px-2 py-1 transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400">后台</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="theme-toggle"
+            class="cursor-pointer rounded-lg border border-transparent p-2 text-zinc-600 transition-colors duration-200 hover:border-zinc-200 hover:bg-zinc-50 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-white"
+            aria-label="切换浅色或深色主题"
+          >
+            <svg id="icon-sun" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+              />
+            </svg>
+            <svg id="icon-moon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="nav-toggle"
+            class="cursor-pointer rounded-lg border border-transparent p-2 text-zinc-600 transition-colors duration-200 hover:border-zinc-200 hover:bg-zinc-50 md:hidden dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="打开菜单"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div
+        id="mobile-nav"
+        class="mt-2 hidden rounded-2xl border border-zinc-200/90 bg-white/95 p-3 shadow-lg backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/95 md:hidden"
+      >
+        <nav class="flex flex-col gap-1 text-sm font-medium">
+          <a href="index.html#posts" class="cursor-pointer rounded-lg px-3 py-2 text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">文章</a>
+          <a href="about.html" class="cursor-pointer rounded-lg px-3 py-2 text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">关于</a>
+          <a href="login.html" class="cursor-pointer rounded-lg px-3 py-2 text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">后台</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="mx-auto max-w-3xl px-4 pb-20 pt-28 md:pt-32">
+      <div class="ui-fade-up-slow rounded-2xl border border-zinc-200/90 bg-white/90 px-6 py-10 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80 md:px-10 md:py-12">
+        <a
+          href="index.html"
+          class="inline-flex cursor-pointer items-center gap-1 text-sm font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          返回首页
+        </a>
+        <h1 class="mt-6 font-display text-3xl font-bold tracking-tight text-zinc-950 md:text-4xl dark:text-white">关于</h1>
+        <p id="about-bio" class="prose-article mt-8 text-zinc-700 dark:text-zinc-300"></p>
+        <p class="mt-6 text-sm text-zinc-500 dark:text-zinc-400">
+          站点标题与作者介绍可在 <code class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">js/posts.js</code> 的 <code class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">BLOG_META</code> 中修改。文章默认由
+          <code class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">content/posts.json</code> 提供，可用
+          <a href="admin/index.html" class="font-medium text-blue-600 underline-offset-2 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Decap CMS</a>（<code class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">admin/</code>）编辑并推送到 Git；若 JSON 未加载成功，前台会回退到本机 localStorage 或 <code class="rounded bg-zinc-100 px-1.5 py-0.5 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">js/posts.js</code> 中的内置示例。
+        </p>
+      </div>
+    </main>
+
+    <footer class="ui-fade-up ui-delay-4 mx-auto max-w-3xl border-t border-zinc-200 px-4 py-10 text-sm text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
+      <p>© <span id="year"></span> 墨迹</p>
+    </footer>
+
+    <script src="js/posts.js"></script>
+    <script src="js/posts-store.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      var bio = document.getElementById("about-bio");
+      if (bio && window.BLOG_META) {
+        bio.textContent = window.BLOG_META.bio;
+      }
+      (function () {
+        var root = document.documentElement;
+        var sun = document.getElementById("icon-sun");
+        var moon = document.getElementById("icon-moon");
+        var btn = document.getElementById("theme-toggle");
+        function syncIcons() {
+          var dark = root.classList.contains("dark");
+          if (sun && moon) {
+            sun.classList.toggle("hidden", !dark);
+            moon.classList.toggle("hidden", dark);
+          }
+          if (btn) btn.setAttribute("aria-label", dark ? "切换到浅色主题" : "切换到深色主题");
+        }
+        syncIcons();
+        if (btn) {
+          btn.addEventListener("click", function () {
+            window.toggleTheme();
+            syncIcons();
+          });
+        }
+        var navBtn = document.getElementById("nav-toggle");
+        var mobileNav = document.getElementById("mobile-nav");
+        if (navBtn && mobileNav) {
+          navBtn.addEventListener("click", function () {
+            var open = mobileNav.classList.toggle("hidden") === false;
+            navBtn.setAttribute("aria-expanded", open ? "true" : "false");
+            navBtn.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

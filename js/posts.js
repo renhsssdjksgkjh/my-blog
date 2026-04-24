@@ -1,0 +1,64 @@
+/** @typedef {{ slug: string; title: string; date: string; excerpt: string; tags: string[]; contentHtml: string }} Post */
+
+// 正式文章由 Decap CMS 编辑 content/posts.json（见下方 BLOG_POSTS_JSON_URL）。此处为 fetch 失败时的兜底数据。
+
+/** 相对网站根路径的 JSON；用本地静态服务器打开项目后生效。 */
+window.BLOG_POSTS_JSON_URL = "content/posts.json";
+
+/** @type {{ siteTitle: string; tagline: string; author: string; bio: string }} */
+window.BLOG_META = {
+  siteTitle: "墨迹",
+  tagline: "记录技术、设计与日常思考的个人博客",
+  author: "博主",
+  bio: "喜欢简洁的界面与可靠的工程实践。这里分享学习笔记、小项目复盘与生活随想。",
+};
+
+/** @type {Post[]} */
+window.POSTS = [
+  {
+    slug: "tailwind-blog-setup",
+    title: "用 HTML 与 Tailwind 搭一个零构建的博客",
+    date: "2026-04-18",
+    excerpt: "不依赖打包工具，也能做出结构清晰、可维护的静态博客页面。",
+    tags: ["前端", "Tailwind"],
+    contentHtml: `
+      <p>静态博客不一定要上框架。对内容为主的站点，HTML + 少量脚本往往更轻、更透明。</p>
+      <h2>结构怎么拆</h2>
+      <p>首页负责列表与导航，文章页根据 <code>slug</code> 从数据里取正文。样式交给 Tailwind CDN，再在 <code>custom.css</code> 里写长文排版与无障碍相关的补充。</p>
+      <h2>可访问性别忘</h2>
+      <ul>
+        <li>可点击区域用 <code>cursor-pointer</code>，并保证键盘焦点可见。</li>
+        <li>尊重 <code>prefers-reduced-motion</code>，减少无意义的动效。</li>
+        <li>图标用内联 SVG，而不是把 emoji 当 UI 图标。</li>
+      </ul>
+      <p>先把内容与信息架构做对，再逐步加交互，读者体验会稳定很多。</p>
+    `,
+  },
+  {
+    slug: "readable-typography",
+    title: "长文阅读：字号、行高与对比度",
+    date: "2026-04-10",
+    excerpt: "排版是为阅读服务的，几个参数调对了，观感会立刻不一样。",
+    tags: ["设计", "排版"],
+    contentHtml: `
+      <p>博客正文建议略大于系统默认字号，行高在 1.65–1.8 之间，段间距清晰。中文与西文混排时，注意标点与两侧空白。</p>
+      <h2>对比度</h2>
+      <p>浅灰正文在浅色背景上很常见，但容易低于 WCAG 建议的正文对比度。正文用偏深的 zinc / slate 色阶更稳妥。</p>
+      <h2>标题层级</h2>
+      <p>展示型字体用在标题，正文字体保持中性，层级一眼可读。避免同一屏里过多字重与字号跳变。</p>
+    `,
+  },
+  {
+    slug: "night-mode-notes",
+    title: "暗色模式：class 策略与边界色",
+    date: "2026-03-28",
+    excerpt: "用 class 切换暗色时，边框与卡片背景要单独调，否则容易发灰或糊成一片。",
+    tags: ["UI", "无障碍"],
+    contentHtml: `
+      <p>暗色模式不是把背景染黑就结束了。边框、分割线、代码块背景都需要单独色板。</p>
+      <h2>切换方式</h2>
+      <p>在 <code>html</code> 上挂 <code>class="dark"</code>，Tailwind 的 <code>dark:</code> 前缀即可统一覆盖。用户选择可记在 <code>localStorage</code>，首屏前用内联脚本避免闪烁更佳。</p>
+      <p>若系统偏好与手动选择冲突，以用户手动为准更尊重预期。</p>
+    `,
+  },
+];
