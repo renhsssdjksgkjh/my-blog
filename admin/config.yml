@@ -5,7 +5,7 @@
 # 本地联调（可选）：安装 decap-server 后在本仓库根目录运行 npx decap-server，
 # 并取消下面 local_backend 的注释；同时把 backend 临时改为 test-repo 仅作界面演示。
 
-site_url: https://renhsssdjksgkjh.github.io/my-blog
+site_url: https://huruoyi.netlify.app
 
 backend:
   name: github
@@ -16,7 +16,7 @@ backend:
 
 media_folder: "content/uploads"
 # 与 GitHub Pages 项目站点的子路径一致，CMS 上传的图片链接才会正确
-public_folder: "/my-blog/content/uploads"
+public_folder: "/content/uploads"
 
 collections:
   - name: "blog"
