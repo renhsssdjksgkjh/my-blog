@@ -19,6 +19,21 @@ npx serve
 
 浏览器访问终端输出的地址（一般为 `http://localhost:3000`），再打开 `index.html` 或根路径。
 
+### 关于 `npx serve` 与文章页
+
+[`serve`](https://github.com/vercel/serve) 默认会开启 **clean URLs**：把 `article.html?slug=...` **301** 重定向到 **`/article`**，且 **`Location` 不带查询串**，导致 `article.js` 读不到 `slug`、一直显示「未找到这篇文章」。  
+本仓库根目录已提供 **`serve.json`**：
+
+- **`"cleanUrls": false`**：避免把 `article.html?slug=...` **301** 到无查询串的 `/article`。
+- **`"directoryListing": false`**：访问站点根路径 **`/`** 时不显示目录列表。
+- **`rewrites`**：
+  - **`/` → `index.html`**：根路径直接打开首页。
+  - **`/article`、`/article/` → `article.html`**：无后缀地址也能返回文章页脚本；无 `?slug=` 时由 **`article.js`** 显示「未找到」（不再自动跳回首页，避免与缓存/旧链接冲突）。
+
+在**项目根目录**执行 `npx serve` 时会自动读取 `serve.json`。若仍异常，可在 Network 里检查 `article.html` 的请求链。
+
+换用 **`python -m http.server`** 等不做 clean URL 的服务器也可避免 301 丢参数问题（但不会自带上述 `serve.json` 行为；根路径可能仍显示目录列表，可手动打开 `index.html`）。
+
 ## 文章与站点信息
 
 | 内容 | 位置 |

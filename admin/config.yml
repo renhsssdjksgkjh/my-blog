@@ -1,19 +1,22 @@
 # Decap CMS（原 Netlify CMS）— 编辑 content/posts.json 后提交到 Git 即可更新站点。
-# 使用前请修改 backend.repo 为你的 GitHub「用户名/仓库名」，并把本仓库推送到该远程仓库。
+# 站点：https://renhsssdjksgkjh.github.io/my-blog/ （GitHub Pages 项目页，带仓库名子路径）
 # 若站点托管在 Netlify 并启用 Identity + Git Gateway，可将 name 改为 git-gateway。
 #
 # 本地联调（可选）：安装 decap-server 后在本仓库根目录运行 npx decap-server，
 # 并取消下面 local_backend 的注释；同时把 backend 临时改为 test-repo 仅作界面演示。
 
+site_url: https://renhsssdjksgkjh.github.io/my-blog
+
 backend:
   name: github
-  repo: your-github-username/your-blog-repo
+  repo: renhsssdjksgkjh/my-blog
   branch: main
 
 # local_backend: true
 
 media_folder: "content/uploads"
-public_folder: "/content/uploads"
+# 与 GitHub Pages 项目站点的子路径一致，CMS 上传的图片链接才会正确
+public_folder: "/my-blog/content/uploads"
 
 collections:
   - name: "blog"

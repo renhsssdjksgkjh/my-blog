@@ -1,8 +1,44 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get("slug");
+  let slug = params.get("slug");
+  if (slug) slug = slug.trim();
+
+  if (!slug) {
+    try {
+      const recovered = window.sessionStorage.getItem("moji_pending_article_slug");
+      if (recovered) {
+        slug = String(recovered).trim();
+        window.sessionStorage.removeItem("moji_pending_article_slug");
+      }
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  if (slug) {
+    try {
+      const canonical = new URL("article.html", window.location.href);
+      canonical.searchParams.set("slug", slug);
+      const cur = window.location.pathname + window.location.search;
+      const want = canonical.pathname + canonical.search;
+      if (cur !== want) {
+        window.history.replaceState(null, "", want);
+      }
+    } catch (e2) {
+      /* ignore */
+    }
+  }
+
   const posts = window.POSTS || [];
-  const post = posts.find((p) => p.slug === slug);
+  const post = slug ? posts.find((p) => p.slug === slug) : null;
+
+  function articleHrefFor(sl) {
+    try {
+      return new URL("article.html?slug=" + encodeURIComponent(sl), window.location.href).href;
+    } catch (e3) {
+      return "article.html?slug=" + encodeURIComponent(sl);
+    }
+  }
 
   const titleEl = document.getElementById("article-title");
   const dateEl = document.getElementById("article-date");
@@ -55,7 +91,7 @@
         const cls = active
           ? "doc-side-link doc-side-link-active cursor-pointer"
           : "doc-side-link cursor-pointer text-zinc-600 hover:bg-sky-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-sky-950/40 dark:hover:text-zinc-100";
-        return `<a class="${cls} block rounded-lg px-2 py-1.5 transition-colors duration-200" href="article.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a>`;
+        return `<a class="${cls} block rounded-lg px-2 py-1.5 transition-colors duration-200" href="${articleHrefFor(p.slug)}">${escapeHtml(p.title)}</a>`;
       })
       .join("");
   }
@@ -63,6 +99,27 @@
   const navHtml = buildPostNavHtml();
   if (navDesktop) navDesktop.innerHTML = navHtml;
   if (navMobile) navMobile.innerHTML = navHtml;
+
+  function bindNavSlugBackup(root) {
+    if (!root) return;
+    root.addEventListener(
+      "pointerdown",
+      function (e) {
+        var a = e.target && e.target.closest && e.target.closest("a[href*='article.html']");
+        if (!a || !root.contains(a)) return;
+        try {
+          var u = new URL(a.getAttribute("href") || "", window.location.href);
+          var s = u.searchParams.get("slug");
+          if (s) window.sessionStorage.setItem("moji_pending_article_slug", String(s).trim());
+        } catch (ex) {
+          /* ignore */
+        }
+      },
+      true
+    );
+  }
+  bindNavSlugBackup(navDesktop);
+  bindNavSlugBackup(navMobile);
 
   function escapeHtml(str) {
     return str

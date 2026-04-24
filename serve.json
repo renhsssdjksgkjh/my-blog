@@ -1,0 +1,19 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "directoryListing": false,
+  "rewrites": [
+    {
+      "source": "/article",
+      "destination": "/article.html"
+    },
+    {
+      "source": "/article/",
+      "destination": "/article.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
+}
